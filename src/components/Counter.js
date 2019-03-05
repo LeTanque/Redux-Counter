@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { increment, decrement } from '../actions';
+import { increment, decrement, reset } from '../actions';
 
 class Counter extends Component {
     incrementIfOdd = () => {
@@ -17,6 +17,7 @@ class Counter extends Component {
         // Fill in the two button onClick methods
         // Upon clicking these buttons, the count
         // should decrement or increment accordingly
+        console.log('This is the state', this.props)
         return (
             <section className='container'>
                 <p>
@@ -27,14 +28,18 @@ class Counter extends Component {
                     <button onClick={() => this.props.decrement()}>
                         -
                     </button>
+                    <button onClick={() => this.props.reset()}>
+                        RESET
+                    </button>
+                    <br></br>
                     {/* Uncomment these button tags if you got
                     around to implementing the extra credit functions */}
-                    {/* <button onClick={this.incrementIfOdd}>
+                    <button onClick={this.incrementIfOdd} className="btn-dark">
                         Increment if odd
                     </button>
-                    <button onClick={this.incrementAsync}>
+                    <button onClick={this.incrementAsync} className="btn-dark">
                         Increment async
-                    </button>  */}
+                    </button> 
                 </p>
             </section>
         );
@@ -59,4 +64,5 @@ const mapStateToProps = (state) => {
 // is only a dumb React component. We pass in all of the functions that
 // are reliant on Redux, along with the component itself, so that Redux
 // makes itself known to this component.
-export default connect(mapStateToProps, { increment, decrement })(Counter);
+export default connect(mapStateToProps, { increment, decrement, reset })(Counter);
+
