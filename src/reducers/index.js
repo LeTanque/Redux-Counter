@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT, RESET } from '../actions';
+import { INCREMENT, DECREMENT, RESET, INCREMENTODD, INCREMENTASYNC } from '../actions';
 
 const initialState = {
   count: 0
@@ -14,13 +14,26 @@ console.log('This is the initialState.count', initialState.count)
 export default (state = initialState.count, action) => {
   console.log('In the reducer yo', action);
   switch (action.type) {
-    case INCREMENT:
+    case INCREMENT: // Increase by one.
       return ++state;
-    case DECREMENT:
+    
+    case DECREMENT: // Decrease by one.
       return --state;
-    case RESET:
+
+    case RESET: // This just resets the state to the initial value, which in this case is 0
       return state = initialState.count;
+
+    case INCREMENTODD:
+      if (state%2) { // if state is odd, move forward one.
+        return ++state;
+      }  
+      return state; // else just return state
+
+    case INCREMENTASYNC:
+      return state;
+      
     default:
       return state;
   }
 };
+

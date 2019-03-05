@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { increment, decrement, reset } from '../actions';
+import { increment, decrement, reset, incrementOdd, incrementAsync } from '../actions';
 
 class Counter extends Component {
-    incrementIfOdd = () => {
-        // Stretch Problem: Implement an increment function that
-        // only increments if the counter value is odd
-    };
+    // incrementIfOdd = () => {
+    //     // Stretch Problem: Implement an increment function that
+    //     // only increments if the counter value is odd
 
-    incrementAsync = () => {
-        // Stretch Problem: Implement an increment function that
-        // increments after waiting for one second
-    };
+    // };
+
+    // incrementAsync = () => {
+    //     // Stretch Problem: Implement an increment function that
+    //     // increments after waiting for one second
+    // };
 
     render() {
         // Fill in the two button onClick methods
@@ -21,23 +22,24 @@ class Counter extends Component {
         return (
             <section className='container'>
                 <p>
-                    Clicked: {this.props.count} times
-                    <button onClick={() => this.props.increment()}>
+                    Clicked: <code>{this.props.count}</code> times 
+                    <br></br>
+                    <button onClick={() => this.props.increment()} className="btn-success my-3">
                         +
                     </button>
-                    <button onClick={() => this.props.decrement()}>
+                    <button onClick={() => this.props.decrement()} className="btn-danger">
                         -
                     </button>
-                    <button onClick={() => this.props.reset()}>
+                    <button onClick={() => this.props.reset()} className="btn-dark">
                         RESET
                     </button>
                     <br></br>
                     {/* Uncomment these button tags if you got
                     around to implementing the extra credit functions */}
-                    <button onClick={this.incrementIfOdd} className="btn-dark">
+                    <button onClick={() => this.props.incrementOdd()} className="btn-info">
                         Increment if odd
                     </button>
-                    <button onClick={this.incrementAsync} className="btn-dark">
+                    <button onClick={() => this.props.incrementAsync()} className="btn-secondary">
                         Increment async
                     </button> 
                 </p>
@@ -64,5 +66,5 @@ const mapStateToProps = (state) => {
 // is only a dumb React component. We pass in all of the functions that
 // are reliant on Redux, along with the component itself, so that Redux
 // makes itself known to this component.
-export default connect(mapStateToProps, { increment, decrement, reset })(Counter);
+export default connect(mapStateToProps, { increment, decrement, reset, incrementOdd, incrementAsync })(Counter);
 
